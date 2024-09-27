@@ -36,7 +36,7 @@ job or in the step like this:
 The simplest use would consist of relying on the webhook's defaults and simply
 providing some text.
 
-```
+```yaml
 - name: Simple notification
   uses: the-actions-org/simple-slack-notify@master
   with:
@@ -46,7 +46,7 @@ providing some text.
 Overriding the channel is sometimes needed, such as to separate out builds,
 deployments, and alerts perhaps.
 
-```
+```yaml
 - name: Channel specific notification
   uses: the-actions-org/simple-slack-notify@master
   with:
@@ -59,7 +59,7 @@ alert red, right?
 
 You can use `danger`, `warning`, `good`, or a hex code such as `#d90000`.
 
-```
+```yaml
 - name: Panic inducing notification
   uses: the-actions-org/simple-slack-notify@master
   with:
@@ -70,7 +70,7 @@ You can use `danger`, `warning`, `good`, or a hex code such as `#d90000`.
 
 Perhaps you also want to change the username?
 
-```
+```yaml
 - name: Panic Bot notification
   uses: the-actions-org/simple-slack-notify@master
   with:
@@ -80,11 +80,11 @@ Perhaps you also want to change the username?
     color: 'danger'
 ```
 
-The action also supports fields, but due to the limitations of GitHub actions
-only passing in inputs as strings, we can't use yaml arrays. So, this is how
+The action also supports fields, but due to the limitations of GitHub Actions
+only passing in inputs as strings, we can't use YAML arrays. So, this is how
 you'd specify a field:
 
-```
+```yaml
 - name: Specifying what to panic about notification
   uses: the-actions-org/simple-slack-notify@master
   with:
@@ -99,7 +99,7 @@ you'd specify a field:
 If there were multiple reasons to panic, you'd add more objects to the fields
 array:
 
-```
+```yaml
 - name: Specifying what to panic about notification
   uses: the-actions-org/simple-slack-notify@master
   with:
@@ -119,7 +119,7 @@ environment is stored within the `env` variable so to access environment
 variables in your strings, you simply use `${env.GITHUB_REPOSITORY}` etc. Here's
 an example:
 
-```
+```yaml
 - name: Environment variable notification
   uses: the-actions-org/simple-slack-notify@master
   with:
@@ -136,7 +136,7 @@ Most other notification plugins use multiple blocks with `if: success()` and
 status and set status specific text. We use `if: always()` so that it runs
 regardless of whether the job is successful or not.
 
-```
+```yaml
 - name: Build notification
   if: always()
   uses: the-actions-org/simple-slack-notify@master
@@ -159,7 +159,7 @@ useful for you as it is for me.
 
 Note: the `BRANCH` variable isn't standard. To get that, use the following:
 
-```
+```yaml
 - name: Extract branch name
   shell: bash
   run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
@@ -172,13 +172,13 @@ This won't work for actions initiated by a pull request though.
 If you want to link to the run, that's super easy. Just add the following string
 either to a field or to the message.
 
-```
+```yaml
 ${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}
 ```
 
 So for a field you'd have:
 
-```
+```json
 { "title": "Action URL", "value": "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}"}
 ```
 
@@ -199,7 +199,7 @@ So for a field you'd have:
 
 ## License
 
-```
+```text
 MIT License
 
 Copyright (c) 2020 Adam K Dean <adamkdean@googlemail.com>
