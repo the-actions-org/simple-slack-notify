@@ -1,6 +1,6 @@
 {
   "name": "simple-slack-notify",
-  "version": "1.0.4",
+  "version": "1.3.1",
   "description": "Slack notification action that just works",
   "author": "The Actions Org",
   "license": "MIT",
