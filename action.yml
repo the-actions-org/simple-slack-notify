@@ -1,5 +1,5 @@
 name: 'Simple Slack Notify'
-description: "Slack notification action that just works"
+description: 'Slack notification action that just works'
 branding:
   icon: 'message-circle'
   color: 'purple'
@@ -20,11 +20,13 @@ inputs:
     default: ''
     required: false
   color:
-    description: The color you want to use, can be good, danger, warning or a hex code
+    description:
+      The color you want to use, can be good, danger, warning or a hex code
     default: ''
     required: false
   status:
-    description: Pass the job status through and omit color for status based color
+    description:
+      Pass the job status through and omit color for status based color
     default: ''
     required: false
   text:
@@ -44,6 +46,7 @@ inputs:
     default: ''
     required: false
   fields:
-    description: 'JSON string containing an array of fields to attach to the notification'
+    description:
+      'JSON string containing an array of fields to attach to the notification'
     default: '[]'
     required: false

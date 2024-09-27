@@ -19,8 +19,7 @@ try {
 
   /* eslint-disable no-eval */
   const disableEval = !!core.getInput('disable_eval')
-  const env = process.env // eslint-disable-line
-  const envsubst = (str) => (disableEval ? str : eval(`\`${str}\``))
+  const envsubst = str => (disableEval ? str : eval(`\`${str}\``))
 
   const channel = envsubst(core.getInput('channel'))
   const username = envsubst(core.getInput('username'))
@@ -55,6 +54,7 @@ try {
   }
 
   // Send the notification
+  // eslint-disable-next-line no-extra-semi
   ;(async () => {
     await slack.send({
       channel,

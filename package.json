@@ -2,7 +2,7 @@
   "name": "simple-slack-notify",
   "version": "1.0.4",
   "description": "Slack notification action that just works",
-  "author": "Adam K Dean <adamkdean@googlemail.com>",
+  "author": "The Actions Org",
   "license": "MIT",
   "keywords": [
     "slack",
@@ -13,29 +13,38 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adamkdean/simple-slack-notify.git"
+    "url": "git+https://github.com/the-actions-org/simple-slack-notify.git"
   },
-  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "all": "npm run lint && npm run format-check && npm run build",
-    "build": "ncc build src/index.js",
-    "lint": "eslint src/**/*.js",
-    "format": "prettier --write src/**/*.js",
-    "format-check": "prettier --check src/**/*.js"
+    "bundle": "npm run format:write && npm run package",
+    "format:write": "npx prettier --write .",
+    "format:check": "npx prettier --check .",
+    "lint": "npx eslint . -c ./.github/linters/.eslintrc.yml",
+    "package": "npx ncc build src/index.js -o dist --source-map --license licenses.txt",
+    "package:watch": "npm run package -- --watch",
+    "all": "npm run format:write && npm run lint && npm run package"
+  },
+  "eslintConfig": {
+    "extends": "./.github/linters/.eslintrc.yml"
   },
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
-    "@slack/webhook": "^5.0.3"
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "@slack/webhook": "^7.0.3"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.22.3",
-    "eslint": "^7.5.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "prettier": "^2.0.5"
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "@babel/preset-env": "^7.25.4",
+    "@vercel/ncc": "^0.38.1",
+    "eslint": "^8.57.1",
+    "eslint-plugin-github": "^5.0.2",
+    "prettier": "^3.3.3"
   }
 }
