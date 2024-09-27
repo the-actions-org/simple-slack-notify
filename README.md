@@ -143,9 +143,13 @@ regardless of whether the job is successful or not.
   with:
     channel: '#builds'
     status: ${{ job.status }}
-    success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build completed successfully'
-    failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed'
-    cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build was cancelled'
+    success_text:
+      '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build completed
+      successfully'
+    failure_text:
+      '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed'
+    cancelled_text:
+      '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build was cancelled'
     fields: |
       [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true },
        { "title": "Branch", "value": "${env.BRANCH}", "short": true }]
@@ -162,7 +166,9 @@ Note: the `BRANCH` variable isn't standard. To get that, use the following:
 ```yaml
 - name: Extract branch name
   shell: bash
-  run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+  run:
+    echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed
+    's/\//_/g')"
 ```
 
 This won't work for actions initiated by a pull request though.
@@ -179,7 +185,10 @@ ${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_
 So for a field you'd have:
 
 ```json
-{ "title": "Action URL", "value": "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}"}
+{
+  "title": "Action URL",
+  "value": "${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}"
+}
 ```
 
 ## Inputs
