@@ -35378,8 +35378,9 @@ try {
   }
   const slack = new IncomingWebhook(process.env.SLACK_WEBHOOK_URL)
 
-  /* eslint-disable no-eval */
   const disableEval = !!core.getInput('disable_eval')
+  // env.* to be used in message text template
+  const env = process.env
   const envsubst = str => (disableEval ? str : eval(`\`${str}\``))
 
   const channel = envsubst(core.getInput('channel'))
