@@ -26,7 +26,7 @@ Be sure that you set the `SLACK_WEBHOOK_URL` environment variable, either in the
 job or in the step like this:
 
 ```yaml
-- uses: the-actions-org/simple-slack-notify@master
+- uses: the-actions-org/simple-slack-notify@v1.3.2
   env:
     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
@@ -38,7 +38,7 @@ providing some text.
 
 ```yaml
 - name: Simple notification
-  uses: the-actions-org/simple-slack-notify@master
+  uses: the-actions-org/simple-slack-notify@v1.3.2
   with:
     text: 'This is the simplest notification'
 ```
@@ -48,7 +48,7 @@ deployments, and alerts perhaps.
 
 ```yaml
 - name: Channel specific notification
-  uses: the-actions-org/simple-slack-notify@master
+  uses: the-actions-org/simple-slack-notify@v1.3.2
   with:
     channel: '#alerts'
     text: 'Something is happening and someone should probably panic'
@@ -61,7 +61,7 @@ You can use `danger`, `warning`, `good`, or a hex code such as `#d90000`.
 
 ```yaml
 - name: Panic inducing notification
-  uses: the-actions-org/simple-slack-notify@master
+  uses: the-actions-org/simple-slack-notify@v1.3.2
   with:
     channel: '#alerts'
     text: 'Something is happening and someone should probably panic'
@@ -72,7 +72,7 @@ Perhaps you also want to change the username?
 
 ```yaml
 - name: Panic Bot notification
-  uses: the-actions-org/simple-slack-notify@master
+  uses: the-actions-org/simple-slack-notify@v1.3.2
   with:
     channel: '#alerts'
     username: 'Panic Bot'
@@ -86,7 +86,7 @@ you'd specify a field:
 
 ```yaml
 - name: Specifying what to panic about notification
-  uses: the-actions-org/simple-slack-notify@master
+  uses: the-actions-org/simple-slack-notify@v1.3.2
   with:
     channel: '#alerts'
     username: 'Panic Bot'
@@ -101,7 +101,7 @@ array:
 
 ```yaml
 - name: Specifying what to panic about notification
-  uses: the-actions-org/simple-slack-notify@master
+  uses: the-actions-org/simple-slack-notify@v1.3.2
   with:
     channel: '#alerts'
     username: 'Panic Bot'
@@ -121,7 +121,7 @@ an example:
 
 ```yaml
 - name: Environment variable notification
-  uses: the-actions-org/simple-slack-notify@master
+  uses: the-actions-org/simple-slack-notify@v1.3.2
   with:
     channel: '#example'
     text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) has finished'
@@ -139,7 +139,7 @@ regardless of whether the job is successful or not.
 ```yaml
 - name: Build notification
   if: always()
-  uses: the-actions-org/simple-slack-notify@master
+  uses: the-actions-org/simple-slack-notify@v1.3.2
   with:
     channel: '#builds'
     status: ${{ job.status }}
